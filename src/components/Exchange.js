@@ -382,22 +382,12 @@ export default class Exchange extends React.Component {
 
           let signed = await mainnetweb3.eth.accounts.signTransaction(paramsObject, mainnetMetaAccount.privateKey)
 
-          let receipt;
           try {
-            receipt = await mainnetweb3.eth.sendSignedTransaction(signed.rawTransaction)
+            await mainnetweb3.eth.sendSignedTransaction(signed.rawTransaction)
           } catch(err) {
             console.log("EEEERRRRRRRROOOOORRRRR ======== >>>>>",err)
             changeAlert({type: 'danger',message: err.toString()});
           }
-          console.log(receipt);
-          changeAlert({type: "success", message: `Sent ${daiSendAmount} DAI to ${daiSendToAddress}...`});
-          this.setState({
-            daiToXdaiMode:false,
-            daiSendAmount:"",
-            daiSendToAddress:"",
-            loaderBarColor:"#FFFFFF",
-            loaderBarStatusText:"",
-          })
         } else {
             // NOTE: For some reason it's important that we reinitialize
             // the daiContract at this point with this.props.web3.
@@ -412,6 +402,14 @@ export default class Exchange extends React.Component {
               0
             )
         }
+        changeAlert({type: "success", message: `Sent ${daiSendAmount} DAI to ${daiSendToAddress}...`});
+        this.setState({
+          daiToXdaiMode:false,
+          daiSendAmount:"",
+          daiSendToAddress:"",
+          loaderBarColor:"#FFFFFF",
+          loaderBarStatusText:"",
+        })
       } else {
         // TODO: Propagate this error to the user
         console.log("Couldn't get gas price");
