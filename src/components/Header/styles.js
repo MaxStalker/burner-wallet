@@ -4,8 +4,6 @@ import { Button, Box, Flex, Image, Icon, Link, Text } from "rimble-ui";
 import burnerLoading from "../../burnerloader.gif";
 
 const HeaderFlex = styled(Flex).attrs(() => ({
-  pt: 2,
-  pb: 2,
   mb: 3,
   alignItems: "center",
   justifyContent: "space-between"

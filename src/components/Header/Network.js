@@ -1,7 +1,7 @@
 import React from "react";
 import { BalanceContainer } from "./styles";
 
-const Balance = props => {
+const Network = props => {
   const { network, isLoading } = props;
   let opacity = isLoading ? 0.1 : 0.9;
 
@@ -12,4 +12,4 @@ const Balance = props => {
   );
 };
 
-export default Balance;
+export default Network;

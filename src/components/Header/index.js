@@ -1,7 +1,7 @@
 import React from 'react';
 import Address from './Address'
 import Scan from './Scan'
-import Balance from './Balance'
+import Network from './Network'
 import { HeaderContainer } from "./styles";
 
 const Header = props => {
@@ -10,7 +10,7 @@ const Header = props => {
   return (
     <HeaderContainer>
       <Address {...props} isLoading={isLoading}/>
-      <Balance {...props} isLoading={isLoading}/>
+      <Network {...props} isLoading={isLoading}/>
       <Scan {...props}/>
     </HeaderContainer>
   )
