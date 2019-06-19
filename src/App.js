@@ -1374,6 +1374,7 @@ render() {
                         address={account}
                         block={this.state.block}
                         recentTxs={ERC20TOKEN?this.state.fullRecentTxs:this.state.recentTxs}
+                        dollarDisplay={dollarDisplay}
                       />
 
                     </Card>
