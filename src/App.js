@@ -9,9 +9,9 @@ import './App.scss';
 
 // CLEAN
 import Header from './components/Header';
+import NavCard from './components/NavCard';
 
 // DIRTY
-import NavCard from './components/NavCard';
 import SendByScan from './components/SendByScan';
 import SendToAddress from './components/SendToAddress';
 import SendBadge from './components/SendBadge';
@@ -1100,10 +1100,7 @@ render() {
           <InnerContainer pt={this.state.extraHeadroom}>
             {showNetworkOverlay && <NetworkOverlay/>}
             {web3_setup}
-
             {header}
-
-
 
             {web3 /*&& this.checkNetwork()*/ && (() => {
               //console.log("VIEW:",view)
