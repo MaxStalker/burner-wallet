@@ -42,7 +42,8 @@ import namehash from 'eth-ens-namehash'
 import { Card, Box, ThemeProvider } from 'rimble-ui';
 import theme from "./theme"
 
-import { MainContainer, InnerContainer } from "./components/App/styles";
+import { MainContainer, InnerContainer, Content } from "./components/App/styles";
+import NetworkOverlay from './components/NetworkOverlay'
 
 //https://github.com/lesnitsky/react-native-webview-messaging/blob/v1/examples/react-native/web/index.js
 import RNMessageChannel from 'react-native-webview-messaging';
@@ -998,16 +999,7 @@ render() {
     web3, account, tx, gwei, block, avgBlockTime, etherscan, balance, metaAccount, burnMetaAccount, view, alert, send
   } = this.state;
 
-  let networkOverlay = ""
-  if(web3 && !this.checkNetwork() && view!="exchange"){
-    networkOverlay = (
-      <div>
-        <input style={{zIndex:13,position:'absolute',opacity:0.95,right:48,top:192,width:194}} value="https://dai.poa.network" />
-        <img style={{zIndex:12,position:'absolute',opacity:0.95,right:0,top:0,maxHeight:370}} src={customRPCHint} />
-      </div>
-    )
-  }
-
+  const showNetworkOverlay = web3 && !this.checkNetwork() && view !== "exchange";
 
   let web3_setup = ""
   if(web3){
@@ -1101,9 +1093,8 @@ render() {
     <ThemeProvider theme={theme}>
       <I18nextProvider i18n={i18n}>
         <MainContainer name={"main"}>
-          <InnerContainer>
-            {extraHead}
-            {networkOverlay}
+          <InnerContainer pt={this.state.extraHeadroom}>
+            {showNetworkOverlay && <NetworkOverlay/>}
             {web3_setup}
 
             {header}
