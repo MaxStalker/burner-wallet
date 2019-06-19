@@ -1,22 +1,16 @@
 import React from "react";
-import burnerloader from "../../burnerloader.gif";
 import { Blockie } from "dapparatus";
+import { BlockieContainer, LoadingBlockie } from "./styles";
 
 const BlockieDisplay = props => {
   const { total, address } = props;
-  if (typeof total == "undefined" || Number.isNaN(total)) {
-    return (
-      <div>
-        <img
-          src={burnerloader}
-          alt={"Loading..."}
-          style={{ maxHeight: 50, opacity: 0.25, marginLeft: -20 }}
-        />
-      </div>
-    );
-  } else {
-    return <Blockie address={address} config={{ size: 6 }} />;
-  }
+  const config = { address, config: { size: 6 } };
+  const isLoading = typeof total == "undefined" || Number.isNaN(total);
+  return (
+    <BlockieContainer>
+      {isLoading ? <LoadingBlockie /> : <Blockie {...config} />}
+    </BlockieContainer>
+  );
 };
 
 export default BlockieDisplay;
