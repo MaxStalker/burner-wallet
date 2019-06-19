@@ -5,7 +5,7 @@ import burnerLoading from "../../burnerloader.gif";
 
 export const HeaderContainer = ({ children }) => {
   return (
-    <Box>
+    <Box pt={2} pb={2} mb={3}>
       <Flex>{children}</Flex>
     </Box>
   );
