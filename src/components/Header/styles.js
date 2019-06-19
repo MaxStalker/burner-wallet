@@ -11,7 +11,7 @@ const HeaderFlex = styled(Flex).attrs(() => ({
 
 export const HeaderContainer = ({ children }) => {
   return (
-    <Box>
+    <Box pr={[3,0]} pl={[3,0]}>
       <HeaderFlex>{children}</HeaderFlex>
     </Box>
   );
