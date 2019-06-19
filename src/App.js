@@ -49,8 +49,8 @@ import RNMessageChannel from 'react-native-webview-messaging';
 import bufficorn from './bufficorn.png';
 import cypherpunk from './cypherpunk.png';
 import eth from './ethereum.png';
-import dai from './dai.jpg';
-import xdai from './xdai.jpg';
+import dai from './dai.png';
+import xdai from './xdai.png';
 import Wyre from './services/wyre';
 
 let base64url = require('base64url')
