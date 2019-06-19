@@ -1,35 +1,14 @@
 import React from "react";
+import { BalanceContainer } from "./styles";
 
 const Balance = props => {
-  const { total, network } = props;
-  let moneyDisplay;
-  if (typeof total == "undefined" || Number.isNaN(total)) {
-    moneyDisplay = (
-      <div style={{ opacity: 0.1, fontSize: 28, paddingTop: 15 }}>
-        connecting...
-      </div>
-    );
-  } else {
-    moneyDisplay = (
-      <div style={{ opacity: 0.4, fontSize: 22, paddingTop: 18 }}>
-        {network}
-      </div>
-    );
-  }
+  const { network, isLoading } = props;
+  let opacity = isLoading ? 0.1 : 0.9;
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        right: 28,
-        top: -4,
-        zIndex: 1,
-        fontSize: 46,
-        opacity: 0.9
-      }}
-    >
-      {moneyDisplay}
-    </div>
+    <BalanceContainer opacity={opacity}>
+      {isLoading ? "Connecting..." : network}
+    </BalanceContainer>
   );
 };
 

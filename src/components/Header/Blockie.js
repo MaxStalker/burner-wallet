@@ -3,9 +3,8 @@ import { Blockie } from "dapparatus";
 import { BlockieContainer, LoadingBlockie } from "./styles";
 
 const BlockieDisplay = props => {
-  const { total, address } = props;
+  const { isLoading, address } = props;
   const config = { address, config: { size: 6 } };
-  const isLoading = typeof total == "undefined" || Number.isNaN(total);
   return (
     <BlockieContainer>
       {isLoading ? <LoadingBlockie /> : <Blockie {...config} />}

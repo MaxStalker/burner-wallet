@@ -3,14 +3,14 @@ import Blockie from "./Blockie";
 import { AddressContainer, AccountName, AddressLink } from "./styles";
 
 const Address = props => {
-  const { address, changeView, ens, view, total } = props;
+  const { address, changeView, ens, view, isLoading } = props;
   const name = ens || address.substring(2, 8);
   const txLink = `https://blockscout.com/poa/dai/address/${address}/transactions`;
   if (view === "main" || view === "exchange") {
     return (
       <AddressLink href={txLink}>
         <AddressContainer>
-          <Blockie total={total} address={address} />
+          <Blockie isLoading={isLoading} address={address} />
           <AccountName name={name} />
         </AddressContainer>
       </AddressLink>
@@ -18,7 +18,7 @@ const Address = props => {
   } else {
     return (
       <AddressContainer onClick={() => changeView("main")}>
-        <Blockie total={total} address={address} />
+        <Blockie isLoading={isLoading} address={address} />
         <AccountName name={name} />
       </AddressContainer>
     );

@@ -5,10 +5,12 @@ import Balance from './Balance'
 import { HeaderContainer } from "./styles";
 
 const Header = props => {
+  const { total } = props;
+  let isLoading = typeof total == "undefined" || Number.isNaN(total);
   return (
     <HeaderContainer>
-      <Address {...props}/>
-      <Balance {...props}/>
+      <Address {...props} isLoading={isLoading}/>
+      <Balance {...props} isLoading={isLoading}/>
       <Scan {...props}/>
     </HeaderContainer>
   )
