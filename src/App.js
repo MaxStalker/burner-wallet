@@ -42,6 +42,8 @@ import namehash from 'eth-ens-namehash'
 import { Card, Box, ThemeProvider } from 'rimble-ui';
 import theme from "./theme"
 
+import { MainContainer, InnerContainer } from "./components/App/styles";
+
 //https://github.com/lesnitsky/react-native-webview-messaging/blob/v1/examples/react-native/web/index.js
 import RNMessageChannel from 'react-native-webview-messaging';
 
@@ -182,13 +184,6 @@ if(ERC20NAME=="BUFF"){
       marginTop:-10
     }}/>
   )
-}
-
-
-let innerStyle = {
-  maxWidth:740,
-  margin:'0 auto',
-  textAlign:'left'
 }
 
 let buttonStyle = {
@@ -1093,7 +1088,6 @@ render() {
         ens={this.state.ens}
         title={this.state.title}
         titleImage={titleImage}
-        mainStyle={mainStyle}
         address={this.state.account}
         changeView={this.changeView}
         balance={balance}
@@ -1106,14 +1100,13 @@ render() {
   return (
     <ThemeProvider theme={theme}>
       <I18nextProvider i18n={i18n}>
-        <div style={mainStyle}>
-          <div style={innerStyle}>
+        <MainContainer name={"main"}>
+          <InnerContainer>
             {extraHead}
             {networkOverlay}
             {web3_setup}
 
-            <div>
-              {header}
+            {header}
 
 
 
@@ -1856,8 +1849,6 @@ render() {
               </div>
             }
             { alert && <Footer alert={alert} changeAlert={this.changeAlert}/> }
-            </div>
-
 
 
             <Dapparatus
@@ -1959,8 +1950,8 @@ render() {
             }}
             />
             {eventParser}
-          </div>
-        </div>
+          </InnerContainer>
+        </MainContainer>
       </I18nextProvider>
     </ThemeProvider>
   )
