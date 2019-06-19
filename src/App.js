@@ -6,7 +6,11 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import gasless from 'tabookey-gasless';
 import './App.scss';
+
+// CLEAN
 import Header from './components/Header';
+
+// DIRTY
 import NavCard from './components/NavCard';
 import SendByScan from './components/SendByScan';
 import SendToAddress from './components/SendToAddress';
@@ -1324,14 +1328,12 @@ render() {
               switch(view) {
                 case 'main':
                 return (
-                  <div>
-                    <Card p={3}>
+                  <>
+                    <Content>
                       {extraTokens}
 
                       <Balance icon={xdai} selected={selected} text={"xDai"} amount={this.state.xdaiBalance} address={account} dollarDisplay={dollarDisplay}/>
-
                       <Balance icon={dai} selected={selected} text={"DAI"} amount={this.state.daiBalance} address={account} dollarDisplay={dollarDisplay}/>
-
                       <Balance icon={eth} selected={selected} text={"ETH"} amount={parseFloat(this.state.ethBalance) * parseFloat(this.state.ethprice)} address={account} dollarDisplay={dollarDisplay}/>
 
                       {badgeDisplay}
@@ -1361,7 +1363,7 @@ render() {
                         dollarDisplay={dollarDisplay}
                       />
 
-                    </Card>
+                    </Content>
                     <Bottom
                       icon={"Settings"}
                       text={i18n.t('advance_title')}
@@ -1369,7 +1371,7 @@ render() {
                         this.changeView('advanced')
                       }}
                     />
-                  </div>
+                  </>
                 );
                 case 'advanced':
                 return (
