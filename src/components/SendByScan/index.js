@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import QrReader from "react-qr-reader";
-import FileReaderInput from 'react-file-reader-input';
 import QrCode from 'qrcode-reader';
-import qrimage from '../qrcode.png';
 import RNMessageChannel from 'react-native-webview-messaging';
-import i18n from "../i18n";
-var Jimp = require("jimp");
-let interval
+import Jimp from "jimp";
+
+import FailMessage from './FailMessage';
+import DisplayReader from "./DisplayReader";
+import { DisplayImage, NavigatorInfo, Close, Container } from './styles';
+
 class SendByScan extends Component {
   constructor(props){
     super(props)
@@ -23,6 +23,7 @@ class SendByScan extends Component {
       percent: 5,
     };
     this.handleScan = this.handleScan.bind(this)
+    this.legacyHandleChange = this.legacyHandleChange.bind(this)
 
     if(RNMessageChannel&&typeof RNMessageChannel.send == "function"){
       try{
@@ -108,10 +109,10 @@ class SendByScan extends Component {
     this.props.goBack();
   };
   componentDidMount(){
-    interval = setInterval(this.loadMore.bind(this),750)
+    this.interval = setInterval(this.loadMore.bind(this),750)
   }
   componentWillUnmount() {
-    clearInterval(interval)
+    clearInterval(this.interval)
     this.stopRecording();
   }
   loadMore(){
@@ -165,105 +166,32 @@ class SendByScan extends Component {
     })
   }
   render() {
-
-    let displayedImage = ""
-    if(this.state.imageData){
-      displayedImage = (
-        <img style={{position:"absolute",left:0,top:0,maxWidth:"100%",opacity:0.7}} src={this.state.imageData} />
-      )
-    }
-
-    let loaderDisplay = ""
-    if(this.state.isLoading){
-      let shadowAmount = 100
-      let shadowColor = this.props.mainStyle.mainColor
-      loaderDisplay = (
-          <div style={{textAlign:'center'}}>
-            <div style={{width:"100%"}}>
-              <img src ={this.props.loaderImage} style={{maxWidth:"25%"}}/>
-            </div>
-            <div style={{width:"80%",height:1,backgroundColor:"#444444",marginLeft:"10%"}}>
-              <div style={{width:this.state.percent+"%",height:1,backgroundColor:this.props.mainStyle.mainColorAlt,boxShadow:"0 0 "+shadowAmount/40+"px "+shadowColor+", 0 0 "+shadowAmount/30+"px "+shadowColor+", 0 0 "+shadowAmount/20+"px "+shadowColor+", 0 0 "+shadowAmount/10+"px #ffffff, 0 0 "+shadowAmount/5+"px "+shadowColor+", 0 0 "+shadowAmount/3+"px "+shadowColor+", 0 0 "+shadowAmount/1+"px "+shadowColor+""}}>
-              </div>
-            </div>
-          </div>
-      )
-    }
-
-    let failMessage = ""
-    if(this.state.scanFail){
-      failMessage = (
-        <div style={{position:'absolute',left:0,top:0,zIndex:99,fontSize:24,color:"#FF0000",backgroundColor:"#333333",opacity:0.9,width:"100%",height:"100%",fontWeight:'bold'}}>
-          <div style={{textAlign:"center",paddingTop:"15%"}}>
-            <div style={{marginBottom:20}}><i className="fas fa-ban"></i></div>
-          </div>
-          <div style={{textAlign:"center",paddingTop:"25%"}}>
-            <div>{i18n.t('send_by_scan.try_again')}</div>
-
-          </div>
-          <div style={{textAlign:"center",padding:"10%",paddingTop:"15%",fontSize:16}}>
-            <div>{this.state.scanFail}</div>
-          </div>
-        </div>
-      )
-    }
-
-    let displayedReader = (
-      <QrReader
-        delay={this.state.delay}
-        onError={this.handleError}
-        onScan={this.handleScan}
-        onImageLoad={this.onImageLoad}
-        style={{ width: "100%" }}
-      />
-    )
-    if(this.state.legacyMode){
-      displayedReader = (
-        <div onClick={()=>{
-          console.log("LOADING...")
-          this.setState({isLoading:true})
-        }}>
-        <FileReaderInput as="binary" id="my-file-input" onChange={this.legacyHandleChange.bind(this)}>
-        <div style={{position: 'absolute',zIndex:11,top:0,left:0,width:"100%",height:"100%",color:"#FFFFFF",cursor:"pointer"}}>
-          {loaderDisplay}
-          <div style={{textAlign:"center",paddingTop:"15%"}}>
-            <div style={{marginBottom:20}}><i className="fas fa-camera"></i></div>
-            <img src={qrimage} style={{position:"absolute",left:"36%",top:"25%",padding:4,border:"1px solid #888888",opacity:0.25,maxWidth:"30%",maxHight:"30%"}} />
-          </div>
-          <div style={{textAlign:"center",paddingTop:"35%"}}>
-
-            <div>{i18n.t('send_by_scan.capture')}</div>
-              <div className="main-card card w-100" style={{backgroundColor:"#000000"}}>
-                <div className="content ops row" style={{paddingLeft:"12%",paddingRight:"12%",paddingTop:10}}>
-                    <button className="btn btn-large w-100" style={{backgroundColor:this.props.mainStyle.mainColor}}>
-                        <i className="fas fa-camera"  /> {i18n.t('send_by_scan.take_photo')}
-                    </button>
-                </div>
-              </div>
-            </div>
-            <div style={{textAlign:"center",paddingTop:"5%"}}>
-              Lay QR flat and take a picture of it from a distance.
-            </div>
-        </div>
-
-        </FileReaderInput>
-        </div>
-      )
-    }
-
-
+    const { imageData, legacyMode, delay, isLoading, percent } = this.state
+    const { scanFail } = this.state
+    const { loaderImage } = this.props
+    const startLoading = () => this.setState({isLoading: true})
     return (
-      <div style={{  position: "fixed",top:0,left:0,right:0,bottom:0,zIndex:5,margin:'0 auto !important',background:"#000000"}}>
-        <div style={{ position: 'absolute',zIndex: 256,top:20,right:20,fontSize:80,paddingRight:20,color:"#FFFFFF",cursor:'pointer'}} onClick={this.onClose} >
-          <i className="fa fa-times" aria-hidden="true"></i>
-        </div>
-        {displayedReader}
-        <div style={{position: 'absolute',zIndex:11,bottom:20,fontSize:12,left:20,color:"#FFFFFF",opacity:0.333}}>
+      <Container>
+        <Close onClick={this.onClose} />
+        <DisplayReader
+          delay={delay}
+          percent={percent}
+          startLoading={startLoading}
+          legacyMode={legacyMode}
+          legacyHandleChange={this.legacyHandleChange}
+          isLoading={isLoading}
+          loaderImage={loaderImage}
+          handleScan={this.handleScan}
+          handleError={this.handleError}
+          onImageLoad={this.onImageLoad}
+          onError={this.handleError}
+        />
+        <NavigatorInfo>
           {navigator.userAgent} - {JSON.stringify(navigator.mediaDevices)}
-        </div>
-        {displayedImage}
-        {failMessage}
-      </div>
+        </NavigatorInfo>
+        {imageData && <DisplayImage src={imageData}/>}
+        {scanFail && <FailMessage scanFail={scanFail}/>}
+      </Container>
     );
   }
 }
