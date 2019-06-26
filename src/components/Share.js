@@ -22,20 +22,18 @@ export default class Receive extends React.Component {
     } = this.props
 
     return (
-      <div>
-        <CopyToClipboard text={url} onCopy={() => {
-          changeAlert({type: 'success', message: i18n.t('share.copied')})
-        }}>
-          <Box>
-            <Flex flexDirection={'column'} alignItems={'center'} p={3} border={1} borderColor={'grey'} borderRadius={1}>
-              <QRCode value={url} size={'100%'} renderAs={'svg'} />
-            </Flex>
-            <Box mt={3}>
-              <Input type='url' readOnly value={url} width={1} />
-            </Box>
+      <CopyToClipboard text={url} onCopy={() => {
+        changeAlert({type: 'success', message: i18n.t('share.copied')})
+      }}>
+        <Box>
+          <Flex flexDirection={'column'} alignItems={'center'} p={3} border={1} borderColor={'grey'} borderRadius={1}>
+            <QRCode value={url} size={'100%'} renderAs={'svg'} />
+          </Flex>
+          <Box mt={3}>
+            <Input type='url' readOnly value={url} width={1} />
           </Box>
-        </CopyToClipboard>
-      </div>
+        </Box>
+      </CopyToClipboard>
     )
   }
 }
