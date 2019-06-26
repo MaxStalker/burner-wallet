@@ -1,8 +1,9 @@
 import React from "react";
 import { Scaler } from "dapparatus";
-import { Flex, Button, Icon, OutlineButton, Box, Text } from "rimble-ui";
+import { Flex, Button, Icon, Box, Text } from "rimble-ui";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import i18next from "i18next";
+import { ShallowButton } from "./General";
 
 export default ({
   buttonStyle,
@@ -55,20 +56,20 @@ export default ({
       </Flex>
       <Flex mx={-2}>
         <Box width={[1, 1/2, 1/2]} m={2}>
-          <OutlineButton fullWidth onClick={() => changeView("share")}>
+          <ShallowButton fullWidth onClick={() => changeView("share")}>
             <Flex alignItems="center">
               <Icon name="Share" mr={2} />
               {i18next.t("main_card.share")}
             </Flex>
-          </OutlineButton>
+          </ShallowButton>
         </Box>
         <Box width={[1, 1/2, 1/2]} m={2}>
-          <OutlineButton fullWidth onClick={() => changeView("send_with_link")}>
+          <ShallowButton fullWidth onClick={() => changeView("send_with_link")}>
             <Flex alignItems="center">
               <Icon name="AttachMoney" mr={2} />
               {i18next.t("main_card.link")}
             </Flex>
-          </OutlineButton>
+          </ShallowButton>
         </Box>
       </Flex>
     </Box>
@@ -80,15 +81,15 @@ export default ({
         <Flex mx={-2}>
           <Box width={[1, 1/2, 1/2]} m={2}>
             AttachMoney
-            <OutlineButton fullWidth onClick={() => changeView("receive")}>
+            <ShallowButton fullWidth onClick={() => changeView("receive")}>
               <Flex alignItems="center">
                 <Icon name="CenterFocusWeak" mr={2} />
                 <Text>{i18next.t("main_card.receive")}</Text>
               </Flex>
-            </OutlineButton>
+            </ShallowButton>
           </Box>
           <Box width={[1, 1/2, 1/2]} m={2}>
-            <OutlineButton
+            <ShallowButton
               fullWidth
               onClick={() => changeView("send_to_address")}
             >
@@ -96,25 +97,25 @@ export default ({
                 <Icon name="Send" mr={2} />
                 <Text>{i18next.t("main_card.send")}</Text>
               </Flex>
-            </OutlineButton>
+            </ShallowButton>
           </Box>
         </Flex>
         <Flex mx={-2}>
           <Box width={[1, 1/2, 1/2]} m={2}>
-            <OutlineButton fullWidth onClick={() => changeView("share")}>
+            <ShallowButton fullWidth onClick={() => changeView("share")}>
               <Flex alignItems="center">
                 <Icon name="Share" mr={2} />
                 <Text>{i18next.t("main_card.share")}</Text>
               </Flex>
-            </OutlineButton>
+            </ShallowButton>
           </Box>
           <Box width={[1, 1/2, 1/2]} m={2}>
-            <OutlineButton fullWidth onClick={() => changeView("vendors")}>
+            <ShallowButton fullWidth onClick={() => changeView("vendors")}>
               <Flex alignItems="center">
                 <Icon name="Money" mr={2} />
                 <Text>{i18next.t("main_card.vendors")}</Text>
               </Flex>
-            </OutlineButton>
+            </ShallowButton>
           </Box>
         </Flex>
       </Box>

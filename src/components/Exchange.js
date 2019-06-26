@@ -15,11 +15,12 @@ import {
   Flex,
   Box,
   Button,
-  OutlineButton,
   Icon,
   Input,
   Field
 } from 'rimble-ui'
+
+import { ShallowButton } from "./General";
 
 import Wyre from '../services/wyre';
 import wyrelogo from '../wyre.png';
@@ -1904,7 +1905,7 @@ export default class Exchange extends React.Component {
 
 
     let sendDaiButton = (
-      <OutlineButton
+      <ShallowButton
         width={1}
         icon={'ArrowForward'}
         icononly
@@ -1947,7 +1948,7 @@ export default class Exchange extends React.Component {
                 onChange={event => this.updateState('daiSendAmount', event.target.value)}
                 width={1}
               />
-              <OutlineButton
+              <ShallowButton
                 ml={2}
                 onClick={() => {
                   this.setState({
@@ -1963,7 +1964,7 @@ export default class Exchange extends React.Component {
                 }}
               >
                 max
-              </OutlineButton>
+              </ShallowButton>
             </Flex>
           </Field>
           <Button width={1} disabled={buttonsDisabled} onClick={this.sendDai.bind(this)}>
@@ -1987,7 +1988,7 @@ export default class Exchange extends React.Component {
 
 
     let sendEthButton = (
-      <OutlineButton
+      <ShallowButton
         width={1}
         icon={'ArrowForward'}
         icononly
@@ -2065,7 +2066,7 @@ export default class Exchange extends React.Component {
                 onChange={event => this.updateState('ethSendAmount', event.target.value)}
                 width={1}
               />
-              <OutlineButton
+              <ShallowButton
                 ml={2}
                 onClick={() => {
                   console.log("Getting gas price...")
@@ -2099,7 +2100,7 @@ export default class Exchange extends React.Component {
               }}
               >
                 max
-              </OutlineButton>
+              </ShallowButton>
             </Flex>
           </Field>
           <Button width={1} disabled={buttonsDisabled} onClick={this.sendEth.bind(this)}>
@@ -2122,7 +2123,7 @@ export default class Exchange extends React.Component {
 
     if(this.props.ERC20TOKEN){
       sendXdaiButton = (
-        <OutlineButton
+        <ShallowButton
           width={1}
           icon={'ArrowForward'}
           icononly
@@ -2132,7 +2133,7 @@ export default class Exchange extends React.Component {
       )
     }else{
       sendXdaiButton = (
-        <OutlineButton
+        <ShallowButton
           width={1}
           icon={'ArrowForward'}
           icononly
@@ -2174,7 +2175,7 @@ export default class Exchange extends React.Component {
                 value={this.state.xdaiSendAmount}
                 onChange={event => this.updateState('xdaiSendAmount', event.target.value)}
               />
-              <OutlineButton
+              <ShallowButton
                 ml={2}
                 onClick={() => {
                   this.setState({xdaiSendAmount: Math.floor((this.props.xdaiBalance-0.01)*100)/100 },()=>{
@@ -2183,7 +2184,7 @@ export default class Exchange extends React.Component {
                 }}
               >
                 max
-              </OutlineButton>
+              </ShallowButton>
             </Flex>
           </Field>
 
