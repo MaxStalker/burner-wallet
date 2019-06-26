@@ -10,7 +10,7 @@ export default {
   lineHeights: {
     solid: 1,
     title: 1.25,
-    copy: 1.5,
+    copy: 1.4,
   },
   fonts: {
     serif: 'athelas, georgia, times, serif',
@@ -40,17 +40,19 @@ export default {
   opacity: {
     disabled: 0.4
   },
+  background:{
+    top: "rgb(85, 51, 25)",
+    bottom: "rgb(202, 110, 40)"
+  },
   colors: {
-    primary: '#4E3FCE',
-    blue: '#007ce0',
-    navy: '#004175',
+    primary: '#F76B1C',
     copyColor: '#3F3D4B',
-    // black: '#000',
+    error: '#FF0000',
+    errorBackground: '#333333',
     black: '#000e1a',
       'near-black': '#111',
       'dark-gray': '#333',
       'mid-gray': '#555',
-    // gray: ' #777',
     grey: '#CCC',
     silver: '#999',
       'light-silver': '#aaa',
