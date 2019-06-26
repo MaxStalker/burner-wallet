@@ -5,3 +5,7 @@ import { OutlineButton } from "rimble-ui";
 export const ShallowButton = styled(OutlineButton).attrs(()=>({}))`
   color: ${({theme})=> theme.colors.silver}
 `;
+
+export const AwesomeIcon = styled('i').attrs(({ icon }) => ({
+  className: `fa fa-${icon}`
+}))``;
