@@ -1,11 +1,11 @@
 import React from 'react';
-import Ruler from "./Ruler";
-import Balance from "./Balance";
+import Ruler from "../Ruler";
+import Balance from "../Balance";
 import cookie from 'react-cookies'
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import Blockies from 'react-blockies';
-import { scroller } from 'react-scroll'
-import i18n from '../i18n';
+import { scroller } from 'react-scroll/modules'
+import i18n from '../../i18n';
 import {
   Box,
   Button,
@@ -13,7 +13,9 @@ import {
   Field,
   Input,
 } from 'rimble-ui';
-const queryString = require('query-string');
+import { ShallowButton } from "../General";
+
+const queryString = require('query-string/index');
 
 export default class SendToAddress extends React.Component {
 
@@ -295,7 +297,7 @@ export default class SendToAddress extends React.Component {
     }
 
     return (
-      <div>
+      <>
         <Box mb={4}>
           <Field mb={3} label={i18n.t('send_to_address.to_address')}>
             <Input
@@ -308,18 +310,18 @@ export default class SendToAddress extends React.Component {
             />
           </Field>
 
-          <OutlineButton icon={'CenterFocusWeak'} mb={4} width={1} onClick={() => {this.props.openScanner({view:"send_to_address"})}}>
+          <ShallowButton icon={'CenterFocusWeak'} mb={4} width={1} onClick={() => {this.props.openScanner({view:"send_to_address"})}}>
             Scan QR Code
-          </OutlineButton>
+          </ShallowButton>
 
-          <div>{ this.state.toAddress && this.state.toAddress.length==42 &&
+          <>{ this.state.toAddress && this.state.toAddress.length==42 &&
             <CopyToClipboard text={toAddress.toLowerCase()}>
               <div style={{cursor:"pointer"}} onClick={() => this.props.changeAlert({type: 'success', message: toAddress.toLowerCase()+' copied to clipboard'})}>
                 <div style={{opacity:0.33}}>{this.state.fromEns}</div>
                 <Blockies seed={toAddress.toLowerCase()} scale={10}/>
               </div>
             </CopyToClipboard>
-          }</div>
+          }</>
 
           <Field mb={3} label={i18n.t('send_to_address.send_amount')}>
             {amountInputDisplay}
@@ -339,7 +341,7 @@ export default class SendToAddress extends React.Component {
         <Button size={'large'} width={1} disabled={!canSend} onClick={this.send}>
           Send
         </Button>
-      </div>
+      </>
     )
   }
 }
