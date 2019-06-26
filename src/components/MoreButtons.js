@@ -1,14 +1,13 @@
 import React from "react";
 import i18n from "../i18n";
 import {
-  OutlineButton,
   Flex,
   Box
 } from "rimble-ui";
+import { ShallowButton } from "./General";
 
 export default ({
   isVendor,
-  buttonStyle,
   ERC20TOKEN,
   address,
   balance,
@@ -21,24 +20,24 @@ export default ({
 
   if (!isVendor) {
     exchangeButton = (
-      <OutlineButton icon={'Shuffle'} width={1} onClick={() => {changeView("exchange");}}>
+      <ShallowButton icon={'Shuffle'} width={1} onClick={() => {changeView("exchange");}}>
         {i18n.t("more_buttons.exchange")}
-      </OutlineButton>
+      </ShallowButton>
     );
   } else {
     exchangeButton = (
-      <OutlineButton icon={'CreditCard'} width={1} onClick={() => {changeView("cash_out");}}>
+      <ShallowButton icon={'CreditCard'} width={1} onClick={() => {changeView("cash_out");}}>
         {"Cash Out"}
-      </OutlineButton>
+      </ShallowButton>
     );
   }
 
   return (
     <Flex>
       <Box width={1/2} mr={3}>
-        <OutlineButton icon={'AttachMoney'} width={1} onClick={() => {changeView("request_funds");}}>
+        <ShallowButton icon={'AttachMoney'} width={1} onClick={() => {changeView("request_funds");}}>
           {i18n.t("more_buttons.request")}
-        </OutlineButton>
+        </ShallowButton>
       </Box>
       <Box width={1/2}>
         {exchangeButton}
