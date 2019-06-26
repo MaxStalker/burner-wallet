@@ -5,10 +5,10 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 import i18n from '../i18n';
 import {
   Button,
-  OutlineButton,
   Input,
   QR as QRCode
 } from 'rimble-ui'
+import { ShallowButton } from "./General";
 
 export default class Advanced extends React.Component {
 
@@ -162,20 +162,20 @@ export default class Advanced extends React.Component {
         <div className="content ops row" style={{marginBottom:10}}>
           <div className="col-6 p-1">
             <a href="https://github.com/austintgriffith/burner-wallet" style={{color:"#FFFFFF"}} target="_blank">
-              <OutlineButton width={1}>
+              <ShallowButton width={1}>
                 <Scaler config={{startZoomAt:400,origin:"50% 50%"}}>
                   <i className="fas fa-code"/> {i18n.t('code')}
                 </Scaler>
-              </OutlineButton>
+              </ShallowButton>
             </a>
           </div>
           <div className="col-6 p-1">
             <a href="https://medium.com/gitcoin/ethereum-in-emerging-economies-b235f8dac2f2" style={{color:"#FFFFFF"}} target="_blank">
-              <OutlineButton width={1}>
+              <ShallowButton width={1}>
                 <Scaler config={{startZoomAt:400,origin:"50% 50%"}}>
                   <i className="fas fa-info"/> {i18n.t('about')}
                 </Scaler>
-              </OutlineButton>
+              </ShallowButton>
             </a>
           </div>
         </div>
