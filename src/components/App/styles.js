@@ -6,12 +6,16 @@ export const MainContainer = styled(Flex).attrs(()=>({
 }))`
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(#292929, #191919);
-  background-color: #191919;
-`;
+  background-image: ${({theme}) => {
+    console.log(theme);
+    return `linear-gradient(${theme.background.top}, ${theme.background.bottom})`
+  }};
+  background-color: ${({theme}) => theme.background.bottom };
+  `;
 
 export const InnerContainer = styled(Flex).attrs(()=>({
   m: '0 auto',
+  borderRadius: 2,
 }))`
   width: 100%;
   flex-direction: column;
@@ -21,6 +25,6 @@ export const InnerContainer = styled(Flex).attrs(()=>({
 
 export const Content = styled(Card).attrs(()=>({
   mb: 3,
-  br: 1,
-  p: [3,4,4]
+  p: [3,4,4],
+  borderRadius: [0, 1]
 }))``;
